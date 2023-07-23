@@ -1,20 +1,15 @@
 import users from '../fixtures/users.json'
 describe('login', () => {
 
-    // const user = {
-    //     name: 'Admin',
-    //     login: 'admin@healthxp.com',
-    //     senha: 'xperience'
-    // }    
-
-    it('deve logar com o perfil do admin', function () {
+    it('deve logar com o perfil do admin', () => {
 
         const user = users.admin
 
         cy.doLogin(user)
-        
+
         cy.contains('.logged-user', 'Olá, ' + user.name)
             .should('be.visible')
+
     })
 
     it('não deve logar com e-mail inválido', () => {
@@ -22,7 +17,7 @@ describe('login', () => {
         const user = users.inv_email
 
         cy.doLogin(user)
-        cy.popUpHave('Insira um email válido.')    
+        cy.popUpHave('Insira um email válido.')
 
     })
 
@@ -42,7 +37,7 @@ describe('login', () => {
         cy.doLogin(user)
         cy.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
 
-       })
+    })
 
     it('logar com e-mail vazio e senha vazios', () => {
 
@@ -61,14 +56,8 @@ describe('login', () => {
         const user = users.empty_email
 
         cy.doLogin(user)
+        cy.popUpHave('Os campos email e senha são obrigatórios.')
 
-        cy.get('#swal2-content')
-            .should('be.visible')
-            .should('have.text', 'Os campos email e senha são obrigatórios.')
-
-
-        // cy.contains('div', 'Os campos email e senha são obrigatórios.')
-        //     .should('be.visible')
     })
 
     it('nao deve logar com senha vazio', () => {
@@ -76,13 +65,8 @@ describe('login', () => {
         const user = users.empty_password
 
         cy.doLogin(user)
+        cy.popUpHave('Os campos email e senha são obrigatórios.')
 
-        cy.get('#swal2-content')
-            .should('be.visible')
-            .should('have.text', 'Os campos email e senha são obrigatórios.')
     })
-
-
-
 })
 
