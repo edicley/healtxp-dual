@@ -1,4 +1,4 @@
-import user from '../fixtures/users.json'
+import users from '../fixtures/users.json'
 describe('login', () => {
 
     // const user = {
@@ -9,7 +9,7 @@ describe('login', () => {
 
     it.only('deve logar com o perfil do admin', function() {
 
-        // const user = this.user
+        const user = users.admin
 
         cy.visit('http://localhost:3000')
 
@@ -21,10 +21,6 @@ describe('login', () => {
 
         cy.contains('.logged-user', 'Olá, ' + user.name)
             .should('be.visible')
-
-
-
-
     })
 
     it('Tentar logar com e-mail inválido', () => {
@@ -42,7 +38,7 @@ describe('login', () => {
 
     })
 
-    it('tentar logar com senha incorreta', () => {
+    it('não deve logar com senha incorreta', () => {
 
         cy.visit('http://localhost:3000')
 
