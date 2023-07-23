@@ -41,6 +41,24 @@ describe('login', () => {
 
     })
 
+    it('não deve logar com e-mail não cadastrado', () => {
+
+        const user = users.email_not_found
+
+        cy.visit('http://localhost:3000')
+
+        cy.get('input[name=email]').type(user.email)
+        cy.get('input[name=password]').type(user.password)
+
+        cy.contains('button', 'Entrar')
+            .click()
+
+        cy.get('#swal2-content')
+            .should('be.visible')
+            .should('have.text', 'Suas credenciais são inválidas, por favor tente novamente!')
+
+    })
+
     it('não deve logar com senha incorreta', () => {
 
         const user = users.inv_pass
@@ -93,7 +111,7 @@ describe('login', () => {
         //     .should('be.visible')
     })
 
-    it.only('nao deve logar com senha vazio', () => {
+    it('nao deve logar com senha vazio', () => {
 
         const user = users.empty_password
 
