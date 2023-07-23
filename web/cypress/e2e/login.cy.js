@@ -1,24 +1,30 @@
 
 describe('login', () => {
 
-    const user = {
-        name: 'Admin',
-        login: 'admin@healthxp.com',
-        senha: 'xperience'
-    }
+    // const user = {
+    //     name: 'Admin',
+    //     login: 'admin@healthxp.com',
+    //     senha: 'xperience'
+    // }    
 
-    it('deve logar com o perfil do admin', () => {
+    it.only('deve logar com o perfil do admin', () => {
 
-        cy.visit('http://localhost:3000')
+        cy.fixture('users.json').then(function (user) {
 
-        cy.get('input[name=email]').type(user.login)
-        cy.get('input[name=password]').type(user.senha)
+            cy.visit('http://localhost:3000')
 
-        cy.contains('button', 'Entrar')
-            .click()
+            cy.get('input[name=email]').type(user.email)
+            cy.get('input[name=password]').type(user.password)
 
-        cy.contains('.logged-user', 'Olá, ' + user.name)
-            .should('be.visible')
+            cy.contains('button', 'Entrar')
+                .click()
+
+            cy.contains('.logged-user', 'Olá, ' + user.name)
+                .should('be.visible')
+
+        })
+
+
     })
 
     it('Tentar logar com e-mail inválido', () => {

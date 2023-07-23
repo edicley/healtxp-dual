@@ -1,11 +1,5 @@
 {
-  "admin": {
     "name": "Admin",
     "email": "admin@healthxp.com",
     "password": "xperience"
-  },
-  "inv_pass": {
-    "email": "admin@healthxp.com",
-    "password": "123"
-  }
 }
