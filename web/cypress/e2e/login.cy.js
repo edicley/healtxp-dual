@@ -7,7 +7,7 @@ describe('login', () => {
     //     senha: 'xperience'
     // }    
 
-    it('deve logar com o perfil do admin', function() {
+    it('deve logar com o perfil do admin', function () {
 
         const user = users.admin
 
@@ -23,22 +23,27 @@ describe('login', () => {
             .should('be.visible')
     })
 
-    it('não deve logar com e-mail inválido', () => {
+    it.only('não deve logar com e-mail inválido', () => {
+
+        const user = users.inv_email
 
         cy.visit('http://localhost:3000')
 
-        cy.get('input[name=email]').type('teste')
-        cy.get('input[name=password]').type(user.senha)
+        cy.get('input[name=email]').type(user.email)
+        cy.get('input[name=password]').type(user.password)
 
         cy.contains('button', 'Entrar')
             .click()
 
-        cy.contains('div', 'Insira um email válido.')
+        cy.get('#swal2-content')
             .should('be.visible')
+            .should('have.text', 'Insira um email válido.')
 
     })
 
-    it.only('não deve logar com senha incorreta', () => {
+
+
+    it('não deve logar com senha incorreta', () => {
 
         const user = users.inv_pass
 
@@ -53,10 +58,6 @@ describe('login', () => {
         cy.get('#swal2-content')
             .should('be.visible')
             .should('have.text', 'Suas credenciais são inválidas, por favor tente novamente!')
-
-        // cy.contains('div', 'Suas credenciais são inválidas, por favor tente novamente!')
-        //     .should('be.visible')
-
     })
 
     it('logar com e-mail vazio e senha vazios', () => {
