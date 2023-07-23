@@ -70,7 +70,7 @@ describe('login', () => {
 
     })
 
-    it.only('logar com e-mail vazio', () => {
+    it('não deve logar com e-mail vazio', () => {
 
         const user = users.empty_email
 
@@ -81,7 +81,6 @@ describe('login', () => {
         }
         
         cy.get('input[name=password]').type(user.password)
-
         cy.contains('button', 'Entrar')
             .click()
 
@@ -94,17 +93,24 @@ describe('login', () => {
         //     .should('be.visible')
     })
 
-    it('logar com campo senha vazio', () => {
+    it.only('nao deve logar com senha vazio', () => {
+
+        const user = users.empty_password
 
         cy.visit('http://localhost:3000')
 
-        cy.get('input[name=email]').type(user.login)
+        cy.get('input[name=email]').type(user.email)
+
+        if(user.password) {
+            cy.get('input[name=password]').type(user.password)
+        }
 
         cy.contains('button', 'Entrar')
             .click()
 
-        cy.contains('div', 'Os campos email e senha são obrigatórios.')
+        cy.get('#swal2-content')
             .should('be.visible')
+            .should('have.text', 'Os campos email e senha são obrigatórios.')
     })
 
 
