@@ -1,28 +1,34 @@
 
 describe('login', () => {
 
+    before(function() {
+        cy.fixture('users.json').then((user) => {
+            this.user = user
+        })
+    })
+
     // const user = {
     //     name: 'Admin',
     //     login: 'admin@healthxp.com',
     //     senha: 'xperience'
     // }    
 
-    it.only('deve logar com o perfil do admin', () => {
+    it.only('deve logar com o perfil do admin', function() {
 
-        cy.fixture('users.json').then(function (user) {
+        const user = this.user
 
-            cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:3000')
 
-            cy.get('input[name=email]').type(user.email)
-            cy.get('input[name=password]').type(user.password)
+        cy.get('input[name=email]').type(user.email)
+        cy.get('input[name=password]').type(user.password)
 
-            cy.contains('button', 'Entrar')
-                .click()
+        cy.contains('button', 'Entrar')
+            .click()
 
-            cy.contains('.logged-user', 'Olá, ' + user.name)
-                .should('be.visible')
+        cy.contains('.logged-user', 'Olá, ' + user.name)
+            .should('be.visible')
 
-        })
+
 
 
     })
