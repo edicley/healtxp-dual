@@ -10,18 +10,18 @@
   },
   "email_not_found": {
     "email": "teste@teste.com",
-    "password": "xxxxxx"
+    "password": "xperience"
   },
   "inv_email" : {
     "email": "teste.teste.com",
     "password": "xxxxxx"
   },
   "empty_email" : {
-    "email": " ",
+    "email": "",
     "password": "xxxxxx"
   },
   "empty_password" : {
     "email": "admin@healthxp.com",
-    "password": " "
+    "password": ""
   }
 }
