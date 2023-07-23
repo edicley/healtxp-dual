@@ -2,6 +2,7 @@
 describe('login', () => {
 
     const user = {
+        name: 'Admin',
         login: 'admin@healthxp.com',
         senha: 'xperience'
     }
@@ -16,7 +17,7 @@ describe('login', () => {
         cy.contains('button', 'Entrar')
             .click()
 
-        cy.contains('.logged-user', 'Olá, Admin')
+        cy.contains('.logged-user', 'Olá, ' + user.name)
             .should('be.visible')
     })
 
