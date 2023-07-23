@@ -7,5 +7,21 @@
   "inv_pass": {
     "email": "admin@healthxp.com",
     "password": "xxxxxx"
+  },
+  "email_not_found": {
+    "email": "teste@teste.com",
+    "password": "xxxxxx"
+  },
+  "inv_email" : {
+    "email": "teste.teste.com",
+    "password": "xxxxxx"
+  },
+  "empty_email" : {
+    "email": " ",
+    "password": "xxxxxx"
+  },
+  "empty_password" : {
+    "email": "admin@healthxp.com",
+    "password": " "
   }
 }
