@@ -1,11 +1,5 @@
-
+import user from '../fixtures/users.json'
 describe('login', () => {
-
-    before(function() {
-        cy.fixture('users.json').then((user) => {
-            this.user = user
-        })
-    })
 
     // const user = {
     //     name: 'Admin',
@@ -15,7 +9,7 @@ describe('login', () => {
 
     it.only('deve logar com o perfil do admin', function() {
 
-        const user = this.user
+        // const user = this.user
 
         cy.visit('http://localhost:3000')
 
