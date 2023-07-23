@@ -22,10 +22,7 @@ describe('login', () => {
         const user = users.inv_email
 
         cy.doLogin(user)
-
-        cy.get('#swal2-content')
-            .should('be.visible')
-            .should('have.text', 'Insira um email válido.')
+        cy.popUpHave('Insira um email válido.')    
 
     })
 
@@ -34,10 +31,7 @@ describe('login', () => {
         const user = users.email_not_found
 
         cy.doLogin(user)
-
-        cy.get('#swal2-content')
-            .should('be.visible')
-            .should('have.text', 'Suas credenciais são inválidas, por favor tente novamente!')
+        cy.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
 
     })
 
@@ -46,11 +40,9 @@ describe('login', () => {
         const user = users.inv_pass
 
         cy.doLogin(user)
+        cy.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
 
-        cy.get('#swal2-content')
-            .should('be.visible')
-            .should('have.text', 'Suas credenciais são inválidas, por favor tente novamente!')
-    })
+       })
 
     it('logar com e-mail vazio e senha vazios', () => {
 
