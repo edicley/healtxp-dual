@@ -11,14 +11,8 @@ describe('login', () => {
 
         const user = users.admin
 
-        cy.visit('http://localhost:3000')
-
-        cy.get('input[name=email]').type(user.email)
-        cy.get('input[name=password]').type(user.password)
-
-        cy.contains('button', 'Entrar')
-            .click()
-
+        cy.doLogin(user)
+        
         cy.contains('.logged-user', 'Olá, ' + user.name)
             .should('be.visible')
     })
@@ -27,13 +21,7 @@ describe('login', () => {
 
         const user = users.inv_email
 
-        cy.visit('http://localhost:3000')
-
-        cy.get('input[name=email]').type(user.email)
-        cy.get('input[name=password]').type(user.password)
-
-        cy.contains('button', 'Entrar')
-            .click()
+        cy.doLogin(user)
 
         cy.get('#swal2-content')
             .should('be.visible')
@@ -45,13 +33,7 @@ describe('login', () => {
 
         const user = users.email_not_found
 
-        cy.visit('http://localhost:3000')
-
-        cy.get('input[name=email]').type(user.email)
-        cy.get('input[name=password]').type(user.password)
-
-        cy.contains('button', 'Entrar')
-            .click()
+        cy.doLogin(user)
 
         cy.get('#swal2-content')
             .should('be.visible')
@@ -63,13 +45,7 @@ describe('login', () => {
 
         const user = users.inv_pass
 
-        cy.visit('http://localhost:3000')
-
-        cy.get('input[name=email]').type(user.email)
-        cy.get('input[name=password]').type(user.password)
-
-        cy.contains('button', 'Entrar')
-            .click()
+        cy.doLogin(user)
 
         cy.get('#swal2-content')
             .should('be.visible')
@@ -92,15 +68,7 @@ describe('login', () => {
 
         const user = users.empty_email
 
-        cy.visit('http://localhost:3000')
-
-        if(user.email) {
-            cy.get('input[name=email]').type(user.email)
-        }
-        
-        cy.get('input[name=password]').type(user.password)
-        cy.contains('button', 'Entrar')
-            .click()
+        cy.doLogin(user)
 
         cy.get('#swal2-content')
             .should('be.visible')
@@ -115,16 +83,7 @@ describe('login', () => {
 
         const user = users.empty_password
 
-        cy.visit('http://localhost:3000')
-
-        cy.get('input[name=email]').type(user.email)
-
-        if(user.password) {
-            cy.get('input[name=password]').type(user.password)
-        }
-
-        cy.contains('button', 'Entrar')
-            .click()
+        cy.doLogin(user)
 
         cy.get('#swal2-content')
             .should('be.visible')
