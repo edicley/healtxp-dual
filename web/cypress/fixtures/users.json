@@ -12,10 +12,40 @@
     "email": "teste@teste.com",
     "password": "xperience"
   },
-  "inv_email" : {
-    "email": "teste.teste.com",
-    "password": "xxxxxx"
-  },
+  "inv_emails" :[
+    {
+      "email": "teste.teste.com",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "1234567890",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "aabbccddeerrff",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "1a2s5e2f3d6a",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "a@#$%&*8",
+      "password": "xxxxxx"
+    },
+    {
+      "email": " @gmail.com",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "admin*gmail.com",
+      "password": "xxxxxx"
+    },
+    {
+      "email": "admin@@",
+      "password": "xxxxxx"
+    }
+  ] ,
   "empty_email" : {
     "email": "",
     "password": "xxxxxx"
