@@ -8,7 +8,7 @@ describe('login', () => {
 
         const user = users.admin
 
-        login.submit(user)
+        login.doLogin(user)
 
         cy.contains('.logged-user', 'Olá, ' + user.name)
             .should('be.visible')
@@ -17,10 +17,16 @@ describe('login', () => {
 
     it('não deve logar com e-mail inválido', () => {
 
-        const user = users.inv_email
+        const emails = users.inv_emails
 
-        login.submit(user)
-        login.popUpHave('Insira um email válido.')
+        login.go()
+
+        emails.forEach((u) => {
+            login.fill(u)
+            login.submit()
+            login.popUpHave('Insira um email válido.')
+            login.popUpBack()
+        })       
 
     })
 
@@ -28,7 +34,7 @@ describe('login', () => {
 
         const user = users.email_not_found
 
-        login.submit(user)
+        login.doLogin(user)
         login.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
 
     })
@@ -37,7 +43,7 @@ describe('login', () => {
 
         const user = users.inv_pass
 
-        login.submit(user)
+        login.doLogin(user)
         login.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
 
     })
@@ -58,7 +64,7 @@ describe('login', () => {
 
         const user = users.empty_email
 
-        login.submit(user)
+        login.doLogin(user)
         login.popUpHave('Os campos email e senha são obrigatórios.')
 
     })
@@ -67,7 +73,7 @@ describe('login', () => {
 
         const user = users.empty_password
 
-        login.submit(user)
+        login.doLogin(user)
         login.popUpHave('Os campos email e senha são obrigatórios.')
 
     })
