@@ -1,17 +1,18 @@
 import users from '../fixtures/users.json'
 
 import login from '../support/pages/LoginPage'
+import dash from '../support/pages/DashPage'
 
 describe('login', () => {
 
-    it('deve logar com o perfil do admin', () => {
+    it.only('deve logar com o perfil do admin', () => {
 
         const user = users.admin
 
         login.doLogin(user)
+        dash.userLoggedIn(user.name)
 
-        cy.contains('.logged-user', 'Olá, ' + user.name)
-            .should('be.visible')
+        
 
     })
 
