@@ -11,9 +11,6 @@ describe('login', () => {
 
         login.doLogin(user)
         dash.userLoggedIn(user.name)
-
-        
-
     })
 
     it('não deve logar com e-mail inválido', () => {
