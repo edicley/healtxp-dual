@@ -17,16 +17,30 @@ describe('login', () => {
 
     it('não deve logar com e-mail inválido', () => {
 
+        let outputMessages = []
+        let expectedMesages = []
+
         const emails = users.inv_emails
 
         login.go()
 
         emails.forEach((u) => {
             login.fill(u)
-            login.submit()
-            login.popUpHave('Insira um email válido.')
+            login.submit()    
+            
+            login.popUp()
+                .invoke('text')
+                .then((t) => {
+                    cy.log(t)
+                    outputMessages.push(t)
+                    expectedMesages.push('Insira um email válido.')
+                })
+
+            //login.popUpHave('Insira um email válido.')
             login.popUpBack()
-        })       
+        })    
+        
+        cy.wrap(outputMessages).should('deep.equal', expectedMesages)
 
     })
 
