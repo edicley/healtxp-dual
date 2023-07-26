@@ -7,6 +7,8 @@ describe('students', () => {
     it('deve poder cadastrar um novo aluno', () => {
 
         const student = students.create
+
+        cy.task('deleteStudent', student.email)
         
         cy.adminLogin()
 
@@ -19,6 +21,9 @@ describe('students', () => {
         cy.get('input[name=feet_tall]').type(student.feet_tall)
 
         cy.contains('button', 'Cadastrar').click()
+
+        cy.get('#swal2-content')
+            .should('have.text', 'Dados cadastrados com sucesso.')
     })
 
 })
