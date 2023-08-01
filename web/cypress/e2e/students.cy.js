@@ -1,29 +1,56 @@
+/// <reference types="cypress" />
 import students from '../fixtures/students.json'
 
-import dash from '../support/pages/DashPage'
+import studentPage from '../support/pages/StudentPage'
 
-describe('students', () => {
+describe('alunos', () => {
 
     it('deve poder cadastrar um novo aluno', () => {
-
         const student = students.create
 
-        cy.task('deleteStudent', student.email)
-        
+        cy.task('deleteStudent', student.email)        
         cy.adminLogin()
 
-        cy.contains('a', 'Cadastrar').click()
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+        studentPage.popup.haveText('Dados cadastrados com sucesso.')        
+    })
 
-        cy.get('input[name=name]').type(student.name)
-        cy.get('input[name=email]').type(student.email)
-        cy.get('input[name=age]').type(student.age)
-        cy.get('input[name=weight]').type(student.weight)
-        cy.get('input[name=feet_tall]').type(student.feet_tall)
+    it('não deve cadastrar com e-mail duplicado', () => {
+        const student = students.duplicate
 
-        cy.contains('button', 'Cadastrar').click()
+        cy.task('resetStudent', student)
+  
+        cy.adminLogin()        
 
-        cy.get('#swal2-content')
-            .should('have.text', 'Dados cadastrados com sucesso.')
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+        studentPage.popup.haveText('O email informado já foi cadastrado!')
+    })
+
+    it('deve remover um aluno sem matrícula', () => {
+
+        const student = students.remove
+
+        cy.task('resetStudent', student)
+
+        cy.adminLogin()        
+
+        studentPage.search(student.name)
+        studentPage.remove(student.email)
+        studentPage.popup.confirm()
+        studentPage.popup.haveText('Exclusão realizada com sucesso.')
+    })
+
+    it('todos os campos são obrigatórios', () => {
+
+        const student = students.requirede
+        cy.adminLogin()
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+
+        studentPage.requiredMessage('Nome completo', 'Nome é obrigatório')
+
     })
 
 })

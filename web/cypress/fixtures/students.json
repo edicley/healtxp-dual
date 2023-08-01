@@ -5,5 +5,26 @@
         "age": "28",
         "weight": "72",
         "feet_tall": "1.80"
+    },
+    "duplicate": {
+        "name": "Bruce Wayne",
+        "email": "bruce@wayne.com",
+        "age": "40",
+        "weight": "85",
+        "feet_tall": "1.88"
+    },
+    "remove": {
+        "name": "Falcão Delete",
+        "email": "falcao@delete.com",
+        "age": "50",
+        "weight": "90",
+        "feet_tall": "1.93"
+    },
+    "requirede": {
+        "name": "",
+        "email": "",
+        "age": "",
+        "weight": "",
+        "feet_tall": ""
     }
 }

@@ -1,16 +1,16 @@
 import users from '../fixtures/users.json'
 
-import login from '../support/pages/LoginPage'
-import dash from '../support/pages/DashPage'
+import loginPage from '../support/pages/LoginPage'
+import studentPage from '../support/pages/StudentPage'
 
 describe('login', () => {
 
-    it.only('deve logar com o perfil do admin', () => {
+    it('deve logar com o perfil do admin', () => {
 
         const user = users.admin
 
-        login.doLogin(user)
-        dash.userLoggedIn(user.name)
+        loginPage.doLogin(user)
+        studentPage.navbar.userLoggedIn(user.name)
     })
 
     it('não deve logar com e-mail inválido', () => {
@@ -20,13 +20,13 @@ describe('login', () => {
 
         const emails = users.inv_emails
 
-        login.go()
+        loginPage.go()
 
         emails.forEach((u) => {
-            login.fill(u)
-            login.submit()    
+            loginPage.fill(u)
+            loginPage.submit()    
             
-            login.popUp()
+            loginPage.popup.content()
                 .invoke('text')
                 .then((t) => {
                     cy.log(t)
@@ -35,7 +35,7 @@ describe('login', () => {
                 })
 
             //login.popUpHave('Insira um email válido.')
-            login.popUpBack()
+            loginPage.popup.back()
         })    
         
         cy.wrap(outputMessages).should('deep.equal', expectedMesages)
@@ -46,8 +46,8 @@ describe('login', () => {
 
         const user = users.email_not_found
 
-        login.doLogin(user)
-        login.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
+        loginPage.doLogin(user)
+        loginPage.popup.haveText('Suas credenciais são inválidas, por favor tente novamente!')
 
     })
 
@@ -55,8 +55,8 @@ describe('login', () => {
 
         const user = users.inv_pass
 
-        login.doLogin(user)
-        login.popUpHave('Suas credenciais são inválidas, por favor tente novamente!')
+        loginPage.doLogin(user)
+        loginPage.popup.haveText('Suas credenciais são inválidas, por favor tente novamente!')
 
     })
 
@@ -76,8 +76,8 @@ describe('login', () => {
 
         const user = users.empty_email
 
-        login.doLogin(user)
-        login.popUpHave('Os campos email e senha são obrigatórios.')
+        loginPage.doLogin(user)
+        loginPage.popup.haveText('Os campos email e senha são obrigatórios.')
 
     })
 
@@ -85,8 +85,8 @@ describe('login', () => {
 
         const user = users.empty_password
 
-        login.doLogin(user)
-        login.popUpHave('Os campos email e senha são obrigatórios.')
+        loginPage.doLogin(user)
+        loginPage.popup.haveText('Os campos email e senha são obrigatórios.')
 
     })
 })

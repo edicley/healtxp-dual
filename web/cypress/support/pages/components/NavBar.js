@@ -1,6 +1,6 @@
 
 
-class DashPage {
+class NavBar {
 
     userLoggedIn(name) {
         cy.contains('aside .logged-user', 'Olá, ' + name)
@@ -8,4 +8,4 @@ class DashPage {
     }
 }
 
-export default new DashPage()
+export default new NavBar()
