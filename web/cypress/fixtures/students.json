@@ -20,11 +20,32 @@
         "weight": "90",
         "feet_tall": "1.93"
     },
-    "requirede": {
+    "required": {
         "name": "",
         "email": "",
         "age": "",
         "weight": "",
         "feet_tall": ""
+    },
+    "under_16_years": {
+        "name": "Maria Luiza",
+        "email": "marialuiza@oi.com",
+        "age": "15",
+        "weight": "50",
+        "feet_tall": "1.50"
+    },
+    "inv_weight": {
+        "name": "Maria Paula",
+        "email": "mariapaula@oi.com",
+        "age": "25",
+        "weight": "-1",
+        "feet_tall": "1.70"
+    },
+    "inv_feet_tall": {
+        "name": "Maria Teresa",
+        "email": "mariateresa@oi.com",
+        "age": "30",
+        "weight": "66",
+        "feet_tall": "0"
     }
 }

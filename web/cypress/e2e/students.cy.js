@@ -49,8 +49,35 @@ describe('alunos', () => {
         studentPage.goToRegister()
         studentPage.submitForm(student)
 
-        studentPage.requiredMessage('Nome completo', 'Nome é obrigatório')
+        studentPage.alertMessage('Nome completo', 'Nome é obrigatório')
 
+    })
+
+    it.only('Não deve cadastrar aluno com menos de 16 anos', () => {
+        const student = students.under_16_years
+        cy.adminLogin()
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+
+        studentPage.alertMessage('Idade', 'A idade mínima para treinar é 16 anos!')
+    })
+
+    it.only('Não deve cadastrar aluno com peso igual ou menor que 0', () => {
+        const student = students.inv_weight
+        cy.adminLogin()
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+
+        studentPage.alertMessage('Peso (em kg)', 'Peso não permitido')
+    })
+
+    it.only('Não deve cadastrar aluno com altura igual ou menor que 0', () => {
+        const student = students.inv_feet_tall
+        cy.adminLogin()
+        studentPage.goToRegister()
+        studentPage.submitForm(student)
+
+        studentPage.alertMessage('Altura', 'Altura não permitida')
     })
 
 })
